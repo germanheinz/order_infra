@@ -124,8 +124,8 @@ spec:
   type: LoadBalancer
   loadBalancerIP: ""
 ---
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: payment-deployment-hpa
   namespace: default
@@ -197,8 +197,8 @@ spec:
   type: LoadBalancer
   loadBalancerIP: ""
 ---
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: stock-deployment-hpa
   namespace: default
