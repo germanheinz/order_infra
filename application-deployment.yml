@@ -29,11 +29,11 @@ spec:
               value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
           resources:
             limits:
-              cpu: "500m"
-              memory: "1024Mi"
+              cpu: "300m"
+              memory: "512Mi"
             requests:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -51,7 +51,6 @@ spec:
       port: 8181
   type: LoadBalancer
   loadBalancerIP: ""
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -83,11 +82,11 @@ spec:
               value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
           resources:
             limits:
-              cpu: "500m"
-              memory: "1024Mi"
+              cpu: "300m"
+              memory: "512Mi"
             requests:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -105,7 +104,6 @@ spec:
       port: 8182
   type: LoadBalancer
   loadBalancerIP: ""
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -137,11 +135,11 @@ spec:
               value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
           resources:
             limits:
-              cpu: "500m"
-              memory: "1024Mi"
+              cpu: "300m"
+              memory: "512Mi"
             requests:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
