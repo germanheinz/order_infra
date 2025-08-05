@@ -51,26 +51,6 @@ spec:
   type: LoadBalancer
   loadBalancerIP: ""
 ---
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: order-deployment-hpa
-  namespace: default
-  labels:
-    app: order-deployment
-spec:
-  scaleTargetRef:
-    kind: Deployment
-    name: order-deployment
-    apiVersion: apps/v1
-  minReplicas: 2
-  maxReplicas: 4
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        targetAverageUtilization: 85
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
