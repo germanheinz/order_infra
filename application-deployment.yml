@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,6 +51,7 @@ spec:
       port: 8181
   type: LoadBalancer
   loadBalancerIP: ""
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -103,26 +105,7 @@ spec:
       port: 8182
   type: LoadBalancer
   loadBalancerIP: ""
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: payment-deployment-hpa
-  namespace: default
-  labels:
-    app: payment-deployment
-spec:
-  scaleTargetRef:
-    kind: Deployment
-    name: payment-deployment
-    apiVersion: apps/v1
-  minReplicas: 2
-  maxReplicas: 4
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        targetAverageUtilization: 85
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -176,23 +159,3 @@ spec:
       port: 8183
   type: LoadBalancer
   loadBalancerIP: ""
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: stock-deployment-hpa
-  namespace: default
-  labels:
-    app: stock-deployment
-spec:
-  scaleTargetRef:
-    kind: Deployment
-    name: stock-deployment
-    apiVersion: apps/v1
-  minReplicas: 2
-  maxReplicas: 4
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        targetAverageUtilization: 85
