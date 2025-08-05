@@ -17,23 +17,23 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: europe-west4-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/order.service:0.0.1-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/order.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
             - name: SPRING_DATASOURCE_INITIALIZATION-MODE
               value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "gke-confluent-kafka-cp-kafka-headless.default.svc.cluster.local:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
-              cpu: "300m"
-              memory: "512Mi"
+              cpu: "500m"
+              memory: "1024Mi"
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: "200m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -70,23 +70,23 @@ spec:
     spec:
       containers:
         - name: payment-service
-          image: europe-west4-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/payment.service:0.0.1-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/payment.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
             - name: SPRING_DATASOURCE_INITIALIZATION-MODE
               value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "gke-confluent-kafka-cp-kafka-headless.default.svc.cluster.local:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
-              cpu: "300m"
-              memory: "512Mi"
+              cpu: "500m"
+              memory: "1024Mi"
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: "200m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -123,23 +123,23 @@ spec:
     spec:
       containers:
         - name: stock-service
-          image: europe-west4-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/stock.service:0.0.1-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/stock.service:1.0-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=stock&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
             - name: SPRING_DATASOURCE_INITIALIZATION-MODE
               value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
-              value: "gke-confluent-kafka-cp-kafka-headless.default.svc.cluster.local:9092"
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.default.svc.cluster.local:8081"
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
-              cpu: "300m"
-              memory: "512Mi"
+              cpu: "500m"
+              memory: "1024Mi"
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: "200m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
