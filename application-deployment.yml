@@ -128,7 +128,7 @@ spec:
           image: europe-west4-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/stock.service:0.0.1-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=stock&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
+              value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
             - name: SPRING_DATASOURCE_INITIALIZATION-MODE
               value: "never"
             - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
