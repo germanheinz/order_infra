@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/order.service:1.0-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/order.service:0.0.1-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
         - name: payment-service
-          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/payment.service:1.0-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/payment.service:0.0.1-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
@@ -123,7 +123,7 @@ spec:
     spec:
       containers:
         - name: stock-service
-          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/stock.service:1.0-SNAPSHOT
+          image: europe-southwest1-docker.pkg.dev/acoustic-atom-468009-u9/order-system-repository/stock.service:0.0.1-SNAPSHOT
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=stock&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
