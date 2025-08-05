@@ -20,10 +20,12 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              value: "gke-confluent-kafka-cp-kafka.kafka.svc.cluster.local:9092"
-            - name: SPRING_KAFKA_PROPERTIES_SCHEMA_REGISTRY_URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.kafka.svc.cluster.local:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
+            - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
+            - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -49,6 +51,26 @@ spec:
   type: LoadBalancer
   loadBalancerIP: ""
 ---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: order-deployment-hpa
+  namespace: default
+  labels:
+    app: order-deployment
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: order-deployment
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 85
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,10 +93,12 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              value: "gke-confluent-kafka-cp-kafka.kafka.svc.cluster.local:9092"
-            - name: SPRING_KAFKA_PROPERTIES_SCHEMA_REGISTRY_URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.kafka.svc.cluster.local:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
+            - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
+            - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -100,6 +124,26 @@ spec:
   type: LoadBalancer
   loadBalancerIP: ""
 ---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: payment-deployment-hpa
+  namespace: default
+  labels:
+    app: payment-deployment
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: payment-deployment
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 85
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -122,10 +166,12 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://postgres-service:5432/postgres?currentSchema=stock&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified"
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              value: "gke-confluent-kafka-cp-kafka.kafka.svc.cluster.local:9092"
-            - name: SPRING_KAFKA_PROPERTIES_SCHEMA_REGISTRY_URL
-              value: "http://gke-confluent-kafka-cp-schema-registry.kafka.svc.cluster.local:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
+            - name: KAFKA-CONFIG_BOOTSTRAP-SERVERS
+              value: "gke-confluent-kafka-cp-kafka-headless:9092"
+            - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
+              value: "http://gke-confluent-kafka-cp-schema-registry:8081"
           resources:
             limits:
               cpu: "500m"
@@ -150,3 +196,23 @@ spec:
       port: 8183
   type: LoadBalancer
   loadBalancerIP: ""
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: stock-deployment-hpa
+  namespace: default
+  labels:
+    app: stock-deployment
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: stock-deployment
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 85
